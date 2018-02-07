@@ -1,0 +1,1002 @@
+<html>
+
+	<head>
+
+		<title>
+			 jogo 
+		</title>
+
+	</head>
+		
+	<body>
+
+		<marquee> jogoooo </marquee>
+		
+		<br/>
+
+				<canvas width="800" height="625" id="main" style="border:1px solid #000000;">
+				</canvas>
+		
+		<script src="classes/mySprite.js"></script>
+
+		<script type="text/javascript">
+
+			var nome_variavel; 
+// ------------------------------------------------------------
+ 
+			var canvas = document.getElementById("main");
+			var screen = canvas.getContext("2d");
+
+// ------------------------------------------------------------
+			
+			var sapo = new mySprite ("Imagens/SPRITESAPO.png", 161, 0, 161, 120, 400, 570, 161/4, 120/4, 2, 0);
+
+			sapo.velx = 35;
+			sapo.vely = 35;
+
+
+			//var sapo_image = new Image();// observacao - todos os "new" algo, esse "algo" comeca com maiusculo, logo ficaria - var nome_variavel = new Ago
+			//var sapo_imageD = new Image();
+			//var sapo_imageE = new Image();
+			//var sapo_imageT = new Image();
+			//var sapo_image_loaded = false;
+			//var sapo_image_Dloaded = false; 
+			//var sapo_image_Eloaded = false; 
+			//var sapo_image_Tloaded = false; 
+			
+			//var pos_sapo_x_sprite =0;  
+			//var sapo.y_sprite =0;
+			//var sapo.w_sprite =161;
+			//var sapo.w_sprite =120;
+
+			//var sapo.w = sapo.w_sprite * 0.4;
+			//var sapo.w = sapo.w_sprite * 0.4;	
+
+			//var vel_sapo_x = sapo.w;
+			//var vel_sapo_y = sapo.w; 
+
+			//var pos_sapo_x = 400;
+			//var sapo.y = 570;		
+
+			var pos_inicial_sapo_x = (canvas.width - sapo.w) /2;
+			var pos_inicial_sapo_y = canvas.height - sapo.w -25;
+// ------------------------------------------------------------
+
+			var efeito_sonoro = new Audio(); // observacao - todos os "new" algo, esse "algo" comeca com maiusculo, logo ficaria - var nome_variavel = new Ago
+
+// -----------------------------------------------------------
+
+			var mouse_click; // variavel usada nas funçoes que fazem a posicaso do mouse aparecer no console ao clicar na tela
+
+//-------------------------------------------------------------
+
+			var cima_apertei = false;
+			var cima_soltei = false;
+			var cima_apertando = false;
+			var cima_solto = true;
+			
+
+			var baixo_apertei = false;
+			var baixo_soltei = false;
+			var baixo_apertando = false;
+			var baixo_solto = true;
+
+
+			var esquerda_apertei = false;
+			var esquerda_soltei = false;
+			var esquerda_apertando = false;
+			var esquerda_solto = true;
+
+
+			var direita_apertei = false;
+			var direita_soltei = false;
+			var direita_apertando = false;
+			var direita_solto = true;
+
+//-------------------------------------------------------------
+			var cena = new mySprite ("Imagens/cenario.png", 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height, 1, 0);
+			
+			/*
+			var pos_cena_x = 0;
+			var pos_cena_y = 0; 
+			
+			var tam_cena_w = canvas.width; // concorda com o canvas
+			var tam_cena_h = canvas.height; // concorda com o canvas
+
+			var cena_image = new Image();
+			var cena_image_loaded = false;
+
+			*/
+//-------------------------------------------------------------
+			
+			var carro1 = new mySprite ("Imagens/Carro Preto Sprite.png", 0, 0, 99, 55, 701, 500, 95, 55, 2, 0);
+
+			carro1.velx = 10;
+			carro1.vely = 0;
+			/*
+			var tam_carro_w = 99;
+			var tam_carro_h = 55;
+
+			var pos_carro_x = canvas.width - tam_carro_w;
+			var pos_carro_y = 505;
+
+			var vel_carro_x = 10;
+			var vel_carro_y = 0;
+
+			var carro_image = new Image() // observacao - todos os "new" algo, esse "algo" comeca com maiusculo, logo ficaria - var nome_variavel = new Ago
+			var carro_image_loaded = false;
+			*/			
+
+//-------------------------------------------------------------
+			
+			var carro2 = new mySprite ("Imagens/Carro Verde Sprite.png", 100, 0, 100, 55, 701, 415, 99, 55, 2, 0.001);
+
+			carro2.velx = 15;
+			carro2.vely = 0;
+
+			/*
+			var tam_carro2_w = 99;
+			var tam_carro2_h = 55;
+
+			var pos_carro2_x = 0;
+			var pos_carro2_y = 405;
+
+			var vel_carro2_x = 15;
+			var vel_carro2_y = 0;
+
+			var carro2_image = new Image()
+			var carro2_image_loaded = false;
+			*/
+
+
+//-------------------------------------------------------------
+			
+			var carro3 = new mySprite ("Imagens/Carro Preto Sprite.png", 0, 0, 99, 55, 701, 95, 99, 55, 2, 0);
+
+			carro3.velx = 25;
+			carro3.vely = 0;
+			
+			/*
+			var tam_carro3_w = 99;
+			var tam_carro3_h = 55;
+
+			var pos_carro3_x = canvas.width - tam_carro3_w;
+			var pos_carro3_y = 95;
+
+			var vel_carro3_x = 25;
+			var vel_carro3_y = 0;
+
+			var carro3e_image = new Image()
+			var carro3d_image = new Image()
+			var carro3e_image_loaded = false;
+			*/
+
+//--------------------------------------------------------------
+
+			var tronco1 = new mySprite ("Imagens/wood.png", 0, 0, 150, 25, 715, 335, 150, 25, 1, 1);
+
+			tronco1.velx = 10;
+			tronco1.vely = 0;
+
+			/*
+			var tam_tronco_w = 150;
+			var tam_tronco_h = 25;
+
+			var vel_tronco_x = 10;
+			var vel_tronco_y = 0;
+			
+			var pos_tronco_x = 715;
+			var pos_tronco_y = 335;
+
+			var tronco_image = new Image()
+			var tronco_image_loaded = false;
+			*/
+
+//--------------------------------------------------------------
+			
+			var tronco2 = new mySprite ("Imagens/wood.png", 0, 0, 150, 25, 715, 300, 150, 25, 1, 1);
+
+			tronco2.velx = 20;
+			tronco2.vely = 0;
+
+			/*
+			var tam_tronco2_w = 150;
+			var tam_tronco2_h = 25;
+
+			var vel_tronco2_x = 5;
+			var vel_tronco2_y = 0;
+			
+			var pos_tronco2_x = 715;
+			var pos_tronco2_y = 300;
+
+			var tronco2_image = new Image()
+			var tronco2_image_loaded = false;
+			*/
+
+//--------------------------------------------------------------
+
+			var tronco3 = new mySprite ("Imagens/wood.png", 0, 0, 150, 25, 715, 265, 150, 25, 1, 1);
+
+			tronco3.velx = 15;
+			tronco3.vely = 0;
+
+			/*
+			var tam_tronco3_w = 150;
+			var tam_tronco3_h = 25;
+
+			var vel_tronco3_x = 15;
+			var vel_tronco3_y = 0;
+			
+			var pos_tronco3_x = 715;
+			var pos_tronco3_y = 265;
+
+			var tronco3_image = new Image()
+			var tronco3_image_loaded = false;
+			*/
+
+//--------------------------------------------------------------
+			
+			var tronco4 = new mySprite ("Imagens/wood.png", 0, 0, 150, 25, 715, 230, 150, 25, 1, 1);
+			tronco4.velx = 20;
+			tronco4.vely = 0;
+
+			/*
+			var tam_tronco4_w = 150;
+			var tam_tronco4_h = 25;
+
+			var vel_tronco4_x = 20;
+			var vel_tronco4_y = 0;
+			
+			var pos_tronco4_x = 715;
+			var pos_tronco4_y = 230;
+
+			var tronco4_image = new Image()
+			var tronco4_image_loaded = false;
+			*/
+
+// -------------------------------------------------------------
+
+			var pontos = 0;
+			var pontos_segunda_fase = 100;
+			var vidas = 3;
+			var vidas_maximo = 5;
+			var tempo = 60; // comeca em 60 e termina em 0 = sapo morre
+			var pos_y_HUD = 620;
+
+// -----------variaveis das faixas (para pontuacao)-----------------
+
+			 var faixa_1 = 535;
+			 var atingiu_faixa_1 = false;
+
+			 var faixa_2 = faixa_1 - 35;
+			 var atingiu_faixa_2 = false;
+
+			 var faixa_3 = faixa_2 - 35;
+			 var atingiu_faixa_3 = false;
+
+			 var faixa_4 = faixa_3 - 35;
+			 var atingiu_faixa_4 = false;
+
+			 var faixa_5 = faixa_4 - 35;
+			 var atingiu_faixa_5 = false;
+
+			 var faixa_6 = faixa_5 - 35;
+			 var atingiu_faixa_6 = false;
+
+			 var faixa_7 = faixa_6 - 35;
+			 var atingiu_faixa_7 = false;
+
+			 var faixa_8 = faixa_7 - 35;
+			 var atingiu_faixa_8 = false;
+
+			 var faixa_9 = faixa_8 - 35;
+			 var atingiu_faixa_9 = false;
+
+			 var faixa_10 = faixa_9 - 35;
+			 var atingiu_faixa_10 = false;
+
+			 var faixa_11 = faixa_10 - 35;
+			 var atingiu_faixa_11 = false;
+
+			 var faixa_12 = faixa_11 - 35;
+			 var atingiu_faixa_12 = false;
+
+			 var faixa_13 = faixa_12 - 35;
+			 var atingiu_faixa_13 = false;
+
+			 var faixa_14 = faixa_13 - 35;
+			 var atingiu_faixa_14 = false;
+
+			 var faixa_15 = faixa_14 - 35;
+			 var atingiu_faixa_15 = false;
+
+			 var faixa_16 = faixa_15 - 35;
+			 var atingiu_faixa_16 = false;
+// -----------------------------------------------------------
+
+
+
+// -----------------------------------------------------------
+
+
+			window.addEventListener("mousedown", mouse_click, true); // diz que " ao clicar " variavel moouse click vira verdadeira
+
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+
+			function nome_funcao()
+			{
+				//
+			}
+ 
+			function nome_funcao2()
+			{
+				//
+			}
+
+// ------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+// ------------------------------------------------------------
+
+			//function mouse_click(mouse) // funcao clicar mouse
+				{
+				//console.log("mouse x: " + mouse.x + "mouse y: " + mouse.y); // analisar
+				}
+
+
+// --------------------------------------------------------------	
+			function key_down(keyboard)
+				
+				{
+					if(keyboard.keyCode == 38 && cima_solto)  // se teclado ( keycode chama o codigo basico do javascript para teclados) = 38 ( 38 numero do codigo correspondente a seta para cima) posicao do sapo em y maior que tamanho do sapo em h
+					{
+						//sapo.y -= vel_sapo_y;
+						cima_solto = false;
+						cima_apertei = true;
+						cima_apertando = true;
+						//sapo.frame = 2;
+						sapo.sx = 161;
+						sapo.sy = 0;
+						//sapo_image = sapo_imageC; 
+					}
+
+					if(keyboard.keyCode == 40 && sapo.x < canvas.height - sapo.h)
+					{
+						sapo.y += sapo.vely;
+						//sapo_image = sapo_imageT;
+					}
+					
+					if(keyboard.keyCode == 37 && sapo.x >= sapo.w)
+					{
+						sapo.x -= sapo.velx;
+						//sapo_image = sapo_imageE;
+					}
+
+					if(keyboard.keyCode == 39 && sapo.x < canvas.width - sapo.w)
+					{
+						sapo.x += sapo.velx;
+						//sapo_image = sapo_imageD;
+					}
+
+				}
+					
+			function key_up(keyboard)
+
+				{
+					if(keyboard.keyCode ==38)
+					{
+						cima_apertando = false;
+						cima_solto = true;
+						cima_soltei = true;
+						//sapo.frame = 1;
+						//sapo.sx = 0;
+						//sapo.sy = 0;
+					}
+
+					if(keyboard.keyCode ==40)
+					{
+						cima_apertando = false;
+						cima_solto = true;
+						cima_soltei = true;
+					}
+
+					if(keyboard.keyCode ==37)
+					{
+						cima_apertando = false;
+						cima_solto = true;
+						cima_soltei = true;
+					}
+
+					if(keyboard.keyCode ==39)
+					{
+						cima_apertando = false;
+						cima_solto = true;
+						cima_soltei = true;
+					}
+				}
+
+
+				window.addEventListener("keydown",key_down, true);
+				window.addEventListener("keyup",key_up, true );
+
+// -----------------------------------------------------------			
+
+			function load()
+			{
+				//console.log("load");
+
+				//sapo_imageC.src="sapo.png";
+				//sapo_imageD.src="sapod.png";
+				//sapo_imageE.src="sapoe.png";
+				//sapo_imageT.src="sapob.png";
+				
+				//sapo_image.src="SPRITESAPO.png";
+
+				//sapo_image.onload =
+				//function()
+				//{
+					//sapo_image_loaded=true;
+					//console.log("sapo_image_loaded")
+				//}
+
+//--------------------------Imagens dos troncos----------------------------				
+	// ---------------------------------------------------	
+				/*
+				tronco_image.src="wood.png";							
+				tronco_image.onload =
+				function()
+				{
+					tronco_image_loaded=true;
+					//console.log("tronco_image_loaded")
+				}
+
+				
+	// ---------------------------------------------------	
+
+				tronco2_image.src="wood.png";							
+				tronco2_image.onload =
+				function()
+				{
+					tronco2_image_loaded=true;
+					//console.log("tronco2_image_loaded")
+				}
+
+			
+
+	// ---------------------------------------------------	
+
+				tronco3_image.src="wood.png";							
+				tronco3_image.onload =
+				function()
+				{
+					tronco3_image_loaded=true;
+					//console.log("tronco3_image_loaded")
+				}
+
+				
+
+	// ---------------------------------------------------	
+
+				tronco4_image.src="wood.png";							
+				tronco4_image.onload =
+				function()
+				{
+					tronco4_image_loaded=true;
+					//console.log("tronco4_image_loaded")
+				}
+				
+
+				
+
+// ---------------------------------------------------
+
+				
+				cena_image.src="cenario.png"
+				cena_image.onload =
+				function()
+				{
+					cena_image_loaded=true;
+					//console.log("cena_image_loaded")
+				}
+				*/
+
+// ---------------------------------------------------
+				/*
+				carro_image.src="carroe.png"
+				carro_image.onload =
+				function()
+				{
+					carro_image_loaded=true;
+					//console.log("carro_image_loaded")
+				}
+				*/
+
+// ---------------------------------------------------
+				/*
+				carro2_image.src="carro2d.png"
+				carro2_image.onload =
+				function()
+				{
+					carro2_image_loaded=true;
+					//console.log("carro2_image_loaded")
+				}
+				*/
+			
+// ---------------------------------------------------
+				/*
+				carro3e_image.src="carro2e.png"
+				carro3d_image.src="carro2d.png"
+				carro3e_image.onload =
+				function()
+				{
+					carro3e_image_loaded=true;
+					//console.log("carro3e_image_loaded")
+				}
+				*/
+				
+				
+//------------------------------------------------------
+
+				efeito_sonoro.src = "Audios/eletricidade.mp3";
+				efeito_sonoro.load();
+// -----------------------------------------------------	
+
+									
+				if(true)
+				{
+					loop();
+				}
+
+				else
+				{
+					setTimeout(load, 30)
+				}
+// -----------------------------------------------------
+
+			}
+
+
+
+			
+			load();
+
+			function update() // funcao para atualizar
+			{
+				//console.log("update");
+				carro1.x -= carro1.velx;
+				carro2.x += carro2.velx;
+				carro3.x -= carro3.velx;
+
+// -------------------------------------------------------
+
+				tronco1.x -= tronco1.velx;
+				tronco2.x -= tronco2.velx;
+				tronco3.x -= tronco3.velx;
+				tronco4.x -= tronco4.velx;
+
+// --------------------------------------------------------
+
+				// caso a posicao do carro esteja menor que -99 ( tamanho do carro ) 
+				if ( carro1.x < - carro1.w) 
+					{
+					// posicao do carro = canvas width ( 0 )
+					carro1.x = canvas.width; 
+					}
+				
+				if ( carro2.x > canvas.width) 
+					
+					{
+					carro2.x = - carro2.w;
+					}
+				
+				if ( carro3.x <= carro3.w - canvas.width/2)
+
+					{
+					carro3.velx *= -1;
+					}		
+
+				if ( carro3.x > canvas.width + carro3.w)
+ 
+					{
+					carro3.x *= -1;
+					}
+
+//-----------------------------------------------------------
+
+					if ( tronco1.x < - tronco1.w) 
+					{
+					// posicao do carro = canvas width ( 0 )
+					tronco1.x = canvas.width; 
+					}
+
+					if ( tronco2.x < - tronco2.w) 
+					{
+					// posicao do carro = canvas width ( 0 )
+					tronco2.x = canvas.width; 
+					}
+
+					if ( tronco3.x < - tronco3.w) 
+					{
+					// posicao do carro = canvas width ( 0 )
+					tronco3.x = canvas.width; 
+					}
+
+					if ( tronco4.x < - tronco4.w) 
+					{
+					// posicao do carro = canvas width ( 0 )
+					tronco4.x = canvas.width; 
+					}
+
+// ----------------------------------------------------------
+
+				if (cima_apertei && sapo.y >= sapo.h)
+				{
+					sapo.y -= sapo.vely;
+					console.log(sapo.y);
+					sapo.sx = sapo.sw;
+
+				}
+
+				if(cima_soltei)
+				{
+					sapo.sx = 0;
+				}
+
+				if (baixo_apertei && sapo.y < sapo.h)
+				{
+					sapo.y += sapo.vely;
+					console.log(sapo.y);
+				}
+
+				if(baixo_soltei)
+				{
+				}
+
+				if (esquerda_apertei && sapo.y <= sapo.h)
+				{
+					sapo.y += sapo.vely;
+					console.log(sapo.y);
+				}
+
+				if(esquerda_soltei)
+				{
+				}
+
+				if (direita_apertei && sapo.y >= sapo.h)
+				{
+					sapo.y -= sapo.vely;
+					console.log(sapo.y); 0
+				}
+
+				if(direita_soltei)
+				{
+				}
+
+
+				cima_apertei = false;
+
+				cima_soltei = false;
+
+// ------------------PONTUAR AO CHEGAR EM FAIXA X----------------
+			
+			if (sapo.y == faixa_1 && !atingiu_faixa_1)
+			{
+				atingiu_faixa_1 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_2 && !atingiu_faixa_2)
+			{
+				atingiu_faixa_2 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_3 && !atingiu_faixa_3)
+			{
+				atingiu_faixa_3 = true;
+				pontos ++;
+			}
+			
+			if (sapo.y == faixa_3 && !atingiu_faixa_3)
+			{
+				atingiu_faixa_3 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_4 && !atingiu_faixa_4)
+			{
+				atingiu_faixa_4 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_5 && !atingiu_faixa_5)
+			{
+				atingiu_faixa_5 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_6 && !atingiu_faixa_6)
+			{
+				atingiu_faixa_6 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_7 && !atingiu_faixa_7)
+			{
+				atingiu_faixa_7 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_8 && !atingiu_faixa_8)
+			{
+				atingiu_faixa_8 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_9 && !atingiu_faixa_9)
+			{
+				atingiu_faixa_9 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_10 && !atingiu_faixa_10)
+			{
+				atingiu_faixa_10 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_11 && !atingiu_faixa_11)
+			{
+				atingiu_faixa_11 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_12 && !atingiu_faixa_12)
+			{
+				atingiu_faixa_12 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_13 && !atingiu_faixa_13)
+			{
+				atingiu_faixa_13 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_14 && !atingiu_faixa_14)
+			{
+				atingiu_faixa_14 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_15 && !atingiu_faixa_15)
+			{
+				atingiu_faixa_15 = true;
+				pontos ++;
+			}
+
+			if (sapo.y == faixa_16 && !atingiu_faixa_16)
+			{
+				atingiu_faixa_16 = true;
+				pontos ++;
+			}
+
+// ---------------PERDER VIDAS AO COLIDIR COM CARROS-------------
+
+			if ( colisao (sapo.x, sapo.y, sapo.w, sapo.w, carro1.x, carro1.y, carro1.w, carro1.h))
+
+			{
+				vidas -= 1;
+				sapo.x = pos_inicial_sapo_x;
+				sapo.y = pos_inicial_sapo_y; 
+			}
+
+				if ( colisao (sapo.x, sapo.y, sapo.w, sapo.w, carro2.x, carro2.y, carro2.w, carro2.h))
+
+			{
+				vidas -= 1;
+				sapo.x = pos_inicial_sapo_x;
+				sapo.y = pos_inicial_sapo_y; 
+			}
+
+				if ( colisao (sapo.x, sapo.y, sapo.w, sapo.w, carro3.x, carro3.y, carro3.w, carro3.h))
+
+			{
+				vidas -= 1;
+				sapo.x = pos_inicial_sapo_x;
+				sapo.y = pos_inicial_sapo_y; 
+			}
+
+				if ( colisao (sapo.x, sapo.y, sapo.w, sapo.w, tronco1.x, tronco1.y, tronco1.w, tronco1.h))
+
+			{
+				sapo.x = tronco1.x;
+				//sapo.y = tronco1.y; 
+			}
+
+			if ( colisao (sapo.x, sapo.y, sapo.w, sapo.w, tronco2.x, tronco2.y, tronco2.w, tronco2.h))
+
+			{
+				sapo.x = tronco2.x;
+				//sapo.y = tronco2.y; 
+			}
+
+			if ( colisao (sapo.x, sapo.y, sapo.w, sapo.w, tronco3.x, tronco3.y, tronco3.w, tronco3.h))
+
+			{
+				sapo.x = tronco3.x;
+				//sapo.y = tronco3.y; 
+			}
+
+			if ( colisao (sapo.x, sapo.y, sapo.w, sapo.w, tronco4.x, tronco4.y, tronco4.w, tronco4.h))
+
+			{
+				sapo.x = tronco4.x;
+				//sapo.y = tronco4.y; 
+			}
+			}
+
+// -----------------FUNCAO PARA DESENHAR (DRAW)------------------
+
+			function draw() // funcao para desenhar
+			{
+				//console.log("draw")
+				screen.clearRect(0, 0, canvas.width, canvas.height);
+				cena.Draw();
+				tronco1.Draw();
+				tronco2.Draw();
+				tronco3.Draw();
+				tronco4.Draw();
+				sapo.Draw();
+				
+				//screen.drawImage(
+					//sapo_image, 
+					//sapo.x_sprite,
+					//sapo.y_sprite,
+					//sapo.w_sprite,
+					//sapo.w_sprite,
+					//sapo.x,
+					//sapo.y,
+					//sapo.w,
+					//sapo.w
+					//);
+
+				carro1.Draw();
+				carro2.Draw();
+
+// ----------------DESENHANDO CARRO INDO E VOLTANDO----------EDITAR			
+				
+				/*
+				if ( carro3_x > 0)
+				{
+				screen.drawImage(carro3e_image, pos_carro3_x, pos_carro3_y);
+				}
+
+				else 
+				{
+				screen.drawImage(carro3d_image, pos_carro3_x, pos_carro3_y);
+				}
+				*/
+
+// -----------------------HUD--------------------------------
+
+				// desenho da HUD
+				screen.font = "20px Comic Sans MS";
+				screen.fillStyle = "#FFCC45";
+				screen.fillText ("pontos = " + pontos, 25, pos_y_HUD);
+
+				screen.font = "20px Comic Sans MS";
+				screen.fillStyle = "#FF0000";
+				screen.fillText ("vidas = " + vidas, 225, pos_y_HUD);
+
+				screen.font = "20px Comic Sans MS";
+				screen.fillStyle = "#CCAA55"; 
+				screen.fillText ("tempo = " + tempo, 600, pos_y_HUD);
+			}
+
+//---------FUNCAO PARA MUDAR VALOR DO TEMPO NA HUD-------------
+
+			setInterval(setTime, 1000);
+
+				function setTime()
+
+				{
+					tempo --;
+				}
+
+// --------------------------------------------------------------
+
+			function loop()
+			{
+				//console.log("loop");
+				
+				update();
+
+				draw();
+
+				setTimeout(loop, 30);
+			}
+
+			function Sapo_Move_Right()
+			{
+
+			}
+			function Sapo_Move_Left()
+			{
+
+			}
+			function Sapo_Move_Up()
+			{
+
+			}
+			function Sapo_Move_Donw()
+			{
+
+			}
+			function colisao
+				(
+				obj1_x,
+				obj1_y,
+				obj1_w,
+				obj1_h,
+				obj2_x,
+				obj2_y,
+				obj2_w,
+				obj2_h				
+				)
+			{
+
+				if 
+					(
+
+						obj1_x + obj1_w < obj2_x // obj 1 a esquerda do obj 2
+
+						||
+
+						obj1_x > obj2_x + obj2_w // obj 1 a direita do obj 2
+
+						||
+
+						obj1_y + obj1_h < obj2_y // obj 1 a acima do obj 2
+
+						||
+
+						obj1_y > obj2_y +obj2_h // obj 1 a abaixo do obj 2
+
+					)
+				{
+					return false;
+				}
+				
+				{
+					return true;
+				}			
+
+			}	 
+
+		</script>
+	
+	</body>
+
+</html>
